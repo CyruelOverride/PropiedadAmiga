@@ -90,16 +90,16 @@ function PropiedadAmiga() {
         {/* Galería */}
         {propiedad.imagenes?.length > 0 ? (
          <Carousel autoplay className="prop-carousel">
-         {propiedad.imagenes.map((img, idx) => (
-           <div key={idx}>
-             <img
-               src={`${config.backendUrl}/${img.url}`}
-               alt={`Imagen ${idx + 1}`}
-               className="prop-image"
-             />
-           </div>
-         ))}
-       </Carousel>
+            {propiedad.imagenes.map((img, idx) => (
+              <div key={idx}>
+                <img
+                  src={`${config.backendUrl}/${img.url}`}
+                  alt={`Imagen ${idx + 1}`}
+                  className="prop-image"
+                />
+              </div>
+            ))}
+          </Carousel>
         ) : (
           <Empty description="Sin imágenes disponibles" />
         )}
@@ -141,13 +141,15 @@ function PropiedadAmiga() {
           contentStyle={{ padding: "8px 12px" }}
         >
           <Descriptions.Item label="Dirección">{propiedad.direccion}</Descriptions.Item>
+          <Descriptions.Item label="Distancia al Mar">{propiedad.distanciaAlMar} metros</Descriptions.Item>
+          <Descriptions.Item label="Superficie">{propiedad.superficie} m²</Descriptions.Item>
+          {propiedad.categoria !== "Terreno" && (
+            <>
           <Descriptions.Item label="Dormitorios">{propiedad.dormitorios}</Descriptions.Item>
-          <Descriptions.Item label="Baños">{propiedad.baños}</Descriptions.Item>
+          <Descriptions.Item label="banos">{propiedad.banos}</Descriptions.Item>
           <Descriptions.Item label="Suites">{propiedad.suites > 0 ? propiedad.suites : "No hay"}</Descriptions.Item>
           <Descriptions.Item label="Cocina">{propiedad.cocina}</Descriptions.Item>
           <Descriptions.Item label="Living Comedor">{propiedad.livingComedor ? "Sí" : "No"}</Descriptions.Item>
-          <Descriptions.Item label="Distancia al Mar">{propiedad.distanciaAlMar} metros</Descriptions.Item>
-          <Descriptions.Item label="Superficie">{propiedad.superficie} m²</Descriptions.Item>
           <Descriptions.Item label="Garaje">{propiedad.garaje}</Descriptions.Item>
           {propiedad.calefaccion && (
             <>
@@ -155,6 +157,8 @@ function PropiedadAmiga() {
               <Descriptions.Item label="Tipo">{propiedad.categoriaCalefaccion || "-"}</Descriptions.Item>
             </>
           )}
+          </>
+        )}
         </Descriptions>
 
         <Divider />
