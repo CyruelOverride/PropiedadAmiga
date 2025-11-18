@@ -1,2 +1,2 @@
-const config = { backendUrl: "https://nhnotarialypropiedades-production.up.railway.app" };
+const config = { backendUrl: "https://nhnotarialypropiedades-zexb.onrender.com" };
 export default config;
