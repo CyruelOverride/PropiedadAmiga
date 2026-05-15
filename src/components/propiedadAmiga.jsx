@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { getById } from "../api/propiedad";
 import config from "../config";
+import { resolveMediaUrl } from "../utils/imageUrl";
 import "./propiedad.css"; // Usamos la misma para consistencia
 
 const { Title, Paragraph, Text } = Typography;
@@ -142,11 +143,13 @@ function PropiedadAmiga() {
         >
           <Descriptions.Item label="Dirección">{propiedad.direccion}</Descriptions.Item>
           <Descriptions.Item label="Distancia al Mar">{propiedad.distanciaAlMar} metros</Descriptions.Item>
-          <Descriptions.Item label="Superficie">{propiedad.superficie} m²</Descriptions.Item>
+          {propiedad.superficie != null && (
+            <Descriptions.Item label="Superficie">{propiedad.superficie} m²</Descriptions.Item>
+          )}
           {propiedad.categoria !== "Terreno" && (
             <>
           <Descriptions.Item label="Dormitorios">{propiedad.dormitorios}</Descriptions.Item>
-          <Descriptions.Item label="banos">{propiedad.banos}</Descriptions.Item>
+          <Descriptions.Item label="Baños">{propiedad.banos}</Descriptions.Item>
           <Descriptions.Item label="Suites">{propiedad.suites > 0 ? propiedad.suites : "No hay"}</Descriptions.Item>
           <Descriptions.Item label="Cocina">{propiedad.cocina}</Descriptions.Item>
           <Descriptions.Item label="Living Comedor">{propiedad.livingComedor ? "Sí" : "No"}</Descriptions.Item>
