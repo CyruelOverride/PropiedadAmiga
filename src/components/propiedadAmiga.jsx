@@ -94,7 +94,7 @@ function PropiedadAmiga() {
             {propiedad.imagenes.map((img, idx) => (
               <div key={idx}>
                 <img
-                  src={`${config.backendUrl}/${img.url}`}
+                  src={resolveMediaUrl(img.url, config.backendUrl)}
                   alt={`Imagen ${idx + 1}`}
                   className="prop-image"
                 />
