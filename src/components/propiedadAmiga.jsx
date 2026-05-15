@@ -92,7 +92,7 @@ function PropiedadAmiga() {
         {propiedad.imagenes?.length > 0 ? (
          <Carousel autoplay className="prop-carousel">
             {propiedad.imagenes.map((img, idx) => (
-              <div key={idx}>
+              <div key={idx} className="prop-carousel-slide">
                 <img
                   src={resolveMediaUrl(img.url, config.backendUrl)}
                   alt={`Imagen ${idx + 1}`}
