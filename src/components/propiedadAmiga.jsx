@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import {
   Typography,
   Spin,
-  Carousel,
   Divider,
   Descriptions,
   Card,
@@ -12,7 +11,9 @@ import {
 } from "antd";
 import { getById } from "../api/propiedad";
 import config from "../config";
-import { resolveMediaUrl } from "../utils/imageUrl";
+import { parseCommaList } from "../utils/parseListField";
+import { buildGalleryItems } from "../utils/propertyGallery";
+import PropiedadMediaCarousel from "./PropiedadMediaCarousel";
 import "./propiedad.css"; // Usamos la misma para consistencia
 
 const { Title, Paragraph, Text } = Typography;
@@ -72,6 +73,8 @@ function PropiedadAmiga() {
       </div>
     );
 
+  const serviciosList = parseCommaList(propiedad.servicios);
+
   return (
     <div className="propiedad-container">
       <Card bordered={false} className="prop-card">
@@ -89,21 +92,10 @@ function PropiedadAmiga() {
         </div>
 
         {/* Galería */}
-        {propiedad.imagenes?.length > 0 ? (
-         <Carousel autoplay className="prop-carousel">
-            {propiedad.imagenes.map((img, idx) => (
-              <div key={idx} className="prop-carousel-slide">
-                <img
-                  src={resolveMediaUrl(img.url, config.backendUrl)}
-                  alt={`Imagen ${idx + 1}`}
-                  className="prop-image"
-                />
-              </div>
-            ))}
-          </Carousel>
-        ) : (
-          <Empty description="Sin imágenes disponibles" />
-        )}
+        <PropiedadMediaCarousel
+          items={buildGalleryItems(propiedad)}
+          backendUrl={config.backendUrl}
+        />
 
         {/* Descripción */}
         <div className="prop-section prop-description">
@@ -114,10 +106,16 @@ function PropiedadAmiga() {
         </div>
 
         {/* Servicios */}
-        {propiedad.servicios && (
+        {serviciosList.length > 0 && (
           <div className="prop-section prop-services">
             <Title level={5}>Servicios</Title>
-            <Paragraph className="text-wrap">{propiedad.servicios}</Paragraph>
+            <div className="tags-container">
+              {serviciosList.map((s) => (
+                <Tag key={s} className="prop-service-tag">
+                  {s}
+                </Tag>
+              ))}
+            </div>
           </div>
         )}
 

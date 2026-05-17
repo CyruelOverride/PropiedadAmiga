@@ -62,6 +62,14 @@
     border-radius: 12px;
     display: block;
   }
+
+  .prop-video {
+    width: 100%;
+    max-height: min(520px, 65vh);
+    border-radius: 12px;
+    display: block;
+    background: #000;
+  }
   
   .prop-description {
     margin: 1.5rem 0;
@@ -95,6 +103,16 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
+  }
+
+  .prop-services .tags-container {
+    justify-content: center;
+  }
+
+  .prop-service-tag {
+    color: #4682b4;
+    border-color: #91c4e8;
+    background: #f0f7fc;
   }
   
   .precio-text {
